@@ -12,10 +12,63 @@
     <link href="css/styles.css" rel="stylesheet">
 </head>
 <body class="bg-light">
-   
+   <div class="bg-light">
+    <div class="login-container">
+        <div class="card shadow">
+            <!-- Cabeçalho do card de login -->
+             <div class="card-header bg-primary text-white">
+                <h4 class="mb-0"><i class="bi bi-person-lock me-2"></i>Login</h4>
+             </div>
+            <!-- Corpo do card de login -->
+             <div class="card-body">
+                <!-- Espaço para mensagem de erro (vazio por padrão) -->
+                <div id="errorMessage" class="alert alert-danger d-none"> Mensagem de erro
+                     aparecerá aqui</div>
+                <!-- Formulário de login -->
+                 <form id="loginForm" method="post" action="index.html">
+                    <!-- Campo de Usuário -->
+                     <div class="mb-3">
+                        <label for="username" class="form-label">
+                            <i class="bi bi-person me-1"></i> Usuário
+                        </label>
+                        <input type="text" id="username" name="username" 
+                        class="form-control">
+                     </div>
 
+                     <!-- Campo de senha -->
+                      <div class="mb-3">
+                        <label for="password" class="form-label">
+                            <i class="bi bi-key me-1"></i> Senha
+                        </label>
+                        <input type="password" id="password" name="password" 
+                        class="form-control">
+                      </div>
+                      <!-- Botão de envio -->
+                       <button type="submit" class="btn btn-primary w-100">
+                        <i class="bi bi-box-arrow-in-right me-1"></i> Entrar
+                       </button>
+                 </form>
 
-    <!-- 1ª Digitação (Aqui) -->
+                 <!-- Seção com a dica de login -->
+                  <div class="login-tip mt-4">
+                    <h5><i class="bi bi-info-circle me-2"></i> Acesso ao sistema</h5>
+                    <p>Utilize os seguites dados para acessar o sistema: </p>
+                    <p><strong>Administrador:</strong> <code>admin</code> / 
+                    <code> admin123</code> - Acesso total ao sistema</p>
+                    <p><strong>Usuário:</strong> <code>usuario</code> /
+                    <code>user123</code> -Acesso limitado</p>
+                  </div>
+             </div>
+
+             <!-- Rodapé do card de login -->
+              <div class="card-footer text-center">
+                <small class="text-muted">Sistema de Locadora de Veículos &copy;  <span ]
+                    id="ano-atual"> 2025
+                </span></small>
+              </div>
+        </div>
+    </div>
+   </div>
 
     
     
@@ -26,3 +79,4 @@
     <script src="js/scripts.js"></script>
 </body>
 </html>
+

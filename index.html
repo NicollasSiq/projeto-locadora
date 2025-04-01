@@ -12,12 +12,234 @@
     <link href="css/styles.css" rel="stylesheet">
 </head>
 <body class="container py-4">
+    <div class="container py-4">
 
+        <!-- barra superior com as informaçoes do usuario -->
+         <div class="row mb-4">
+            <div class="col-12">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h1> Sistema de locadora de veiculos</h1>
+                    <div class="d-flex align-items-center gap-3 user-info">
 
-    
+                        <!-- icuone de usuario usando boostrap icons -->
+                         <span class="user-icon">
+                            <i class="bi bi-person-circle" style="font-size: 24px;"></i>
+                         </span>
+                         <!-- texto "bem vindo" [username] -->
+                          <span class="welcome-text">Bem vindo, <strong id="username-display">Admin</strong></span>
 
-    <!-- 2ª Digitação (Aqui) -->
+                        <!-- botao para sair com icone usando boostrap icons -->
+                         <a href="login.html" class="btn btn-outline-danger d-flex align-items-center gap-1">
+                            <i class="bi bi-box-arrow-right"></i>
+                            Sair
+                         </a>
 
+                    </div>
+                </div>
+            </div>
+         </div>
+         <!-- Mensagem de alerta (oculta por pradrao) -->
+          <div id="sistema-mensagem" class="alert alert-info alert-dismissible fade show d-none" role="alert">
+            <span id="mensagem-texto">Mensagem do sistema aparecera aqui</span>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" arial-label="close"></button>
+          </div>
+
+          <!-- linha para formularios (adicionar veiculo e calcular previsao) -->
+           <div class="row same-height-row">
+            <!-- _________-- -->
+
+            <div class="col-md-6" id="secao-adicionar-veiculo">
+                <div class="card h-100">
+                    <div class="card-header">
+                        <h4 class="mb-0"><i class="bi bi-plus-circle me-2"></i>Adicionar Novo veiculo</h4>
+                    </div>
+                    <div class="card-body">
+                        <form id="addVehicleForm" method="post" action="">
+                            <div class="mb-3">
+                                <label class="form-label">modelo</label>
+                                <input type="text" name="modelo" class="form-control">
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Placa</label>
+                                <input type="text" name=placa" class="form-control">
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">TIpo</label>
+                                <select name="tipo" class="form-select">
+                                    <option value="Carro">Carro</option>
+                                    <option value="Moto">Moto</option>
+                                </select>
+                            </div>
+
+                            <button type="submit" name="adicionar" class="btn btn-primary w-100"><i class="bi bi-plus-lg me-1">Adicionar veiculo</i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- formulario para calcular a previsao (visivel para todos os perfis) -->
+            <div class="col-md-6" id="secao-calcular">
+                <div class="card h-100">
+                    <div class="card-header">
+                        <h4 class="mb-0"><i class="bi bi-calculator me-2"></i>Calcular Previsao de Aluguel</h4>
+                    </div>
+                    <div class="card-body">
+                        <form action="" id="calcForm" method="post">
+                            <div class="mb-3">
+                                <label class="form-label">Tipo de veiculo</label>
+                                <select name="tipo_calculo" class="form-select">
+                                    <option value="carro">Carro</option>
+                                    <option value="Moto">Moto</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">QUantidade de Dias</label>
+                                <input type="number" name="dias_calculo" class="form-control" value="1" min="1">
+                            </div>
+                            <button class="btn btn-info w-100" type="submit" name="calcular">
+                                <i class="bi bi-calculator me-1">Calcular previsao</i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+     <!-- tabela de veiculos -->
+     <div class="row mt-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="mb-0"><i class="bi bi-list-check me-2"></i>Veiculos Cadastrados</h4>
+                </div>
+                <div class="card-body">
+                    <div aria-multiselectable="table-responsive">
+                        <table class="table table-striped table-hover">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th>Tipo</th>
+                                    <th>Modelo</th>
+                                    <th>Placa</th>
+                                    <th>Status</th>
+                                    <th>Açoes</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- veiculo1: carro alugado -->
+                                 <tr>
+                                    <td>
+                                        <i class="bi bi-car-front me-1"></i>Carro
+                                    </td>
+                                    <td>Sandero</td>
+                                    <td>FMA-6680</td>
+                                    <td>
+                                        <span class="nadge bg-warnign">
+                                            <i class="bi bi-exclamation-triangle me-1"></i>Alugado
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <div class="action-wrapper">
+                                            <form class="btn-group-actions" method="post">
+                                                <input type="hidden" name="modelo" value="sandero">
+                                                <input type="hidden" name="placa" value="FMA-6680">
+
+                                                <!-- botao deletar(visivel apenas para adimin) -->
+                                                 <button type="submit" name="deletar" class="btn btn-danger btn-sm delete-btn admin-only">
+                                                    <i class="bi bi-trash me-1"></i>Deletar
+                                                 </button>
+
+                                                 <div class="rent-group">
+                                                    <!-- Veiculo alugado : botao devolver (visivel apenas para admin) -->
+                                                     <button type="submit" name="devolver" class="btn btn-warning btn-sm admin-only">
+                                                        <i class="bi bi-box-arrow-left me-1"></i>Devolver
+                                                     </button>
+                                                 </div>
+                                            </form>
+                                        </div>
+                                    </td>
+                                 </tr>
+
+                                 <!-- veiculo 2:moto-disponivel -->
+                                  <tr>
+                                    <td>
+                                        <i class="bi bi-bicycle me-1"></i>Moto
+                                    </td>
+                                    <td>Ninja</td>
+                                    <td>FMA-6600</td>
+                                    <td>
+                                        <span class="badge bg-success">
+                                            <i class="bi bi-ckeck-circle me-1"></i>Disponivel
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <div class="action-wrapper">
+                                            <form class="btn-group-actions" method="post">
+                                                <input type="hidden" name="Modelo" value="Onix">
+                                                <input type="hidden" name="placa" value="ABC 1234">
+
+                                                <!-- botao deletar (apenas admin) -->
+                                                 <button type="submit" name="deletar" class="btn btn-danger btn-sm delete-btn admin-only"> <i class="bi bi-trash me-1"></i>Deletar</button>
+
+                                                 <div class="rent-group">
+                                                    <!-- veiculo disponivel, campo de dias e botao alugar(Admin) -->
+                                                     <input type="number" name="dias" class="form-control days-input admin-only" value="1" min="1">
+                                                     <button type="submit" name="alugar" class="btn btn-primary btn-sm admin-only"><i class="bi bi-key me-1"></i>Alugar</button>
+                                                 </div>
+                                            </form>
+                                        </div>
+                                    </td>
+
+                                  </tr>
+
+                                  <!-- veiculo 4: moto disponivel -->
+                                   <tr>
+                                    <td>
+                                        <i class="bi bi-bicycle me-1"></i>
+                                        Moto
+                                    </td>
+                                    <td>HONDA CB 500</td>
+                                    <td>
+                                        <span class="badge bg-success">
+                                            <i class="bi bi-ckeck-circle me-1"></i>Disponivel
+                                        </span>
+                                    </td>
+                                        <td><div class="action-wrapper">
+                                            <form class="btn-group-actions" method="post">
+                                                <input type="hidden" name="Modelo" value="HONDA CB 500">
+                                                <input type="hidden" name="placa" value="DEF-5678">
+
+                                                <!-- botao deletar (apenas admin) -->
+                                                <button type="submit" name="deletar" class="btn btn-danger btn-sm delete-btn admin-only"> <i class="bi bi-trash me-1"></i>Deletar</button>
+
+                                                <div class="rent-group">
+                                                    <!-- veiculo disponivel, campo de dias e botao alugar(Admin) -->
+                                                    <input type="number" name="dias" class="form-control days-input admin-only" value="1" min="1">
+                                                    <button type="submit" name="alugar" class="btn btn-primary btn-sm admin-only"><i class="bi bi-key me-1"></i>Alugar</button>
+                                                    
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </td>
+
+                                   </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+     <!-- rodapé -->
+      <footer class="mt-5 text-center text-muted">
+        <hr>
+        <p>sistema de locadora de veiculos &copy <span id="ano-atual">2025</span> - 
+        utilizando MySQL para persistencia de dados</p>
+      </footer>
 
 
     
